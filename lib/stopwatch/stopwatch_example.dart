@@ -1,110 +1,98 @@
-// 
-
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'dart:async';
 
-class MyStopwatch extends StatefulWidget {
-  const MyStopwatch({super.key});
+class MyStopWatch extends StatefulWidget {
+  const MyStopWatch({super.key});
 
   @override
-  State<MyStopwatch> createState() => _MyStopwatchState();
+  State<MyStopWatch> createState() => _MyStopWatchState();
 }
 
-class _MyStopwatchState extends State<MyStopwatch> {
+class _MyStopWatchState extends State<MyStopWatch> {
   int seconds = 0;
-  Timer? timer;
+  int milliseconds = 0;
+  late Timer timer;
   bool isRunning = false;
-
-  void startTimer() {
-    if (isRunning) return;
-
-    isRunning = true;
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        seconds++;
-      });
-    });
-  }
-
-  void stopTimer() {
-    timer?.cancel();
-    isRunning = false;
-  }
-
-  void resetTimer() {
-    stopTimer();
-    setState(() {
-      seconds = 0;
-    });
-  }
-
-  String secondsToText() {
-    if (seconds == 1) {
-      return "1 second";
+  void _startTimer() {
+    if (!isRunning) {
+      isRunning = true;
     }
-    return "$seconds seconds";
+  }
+
+  void _stopTimer() {
+    if (isRunning) {
+      isRunning = false;
+    }
+  }
+
+  void _onTick(Timer timer) {
+    setState(() {
+      if (isRunning) milliseconds += 100;
+    });
+  }
+
+  String secondstotext(millis) {
+    final seconds = millis / 1000;
+    return '$seconds seconds';
   }
 
   @override
-  void dispose() {
-    timer?.cancel();
-    super.dispose();
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(const Duration(milliseconds: 100), _onTick);
   }
 
+  // String secondstotext() => seconds <= 1 ? '1 second' : '$seconds seconds';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Stopwatch"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              secondsToText(),
+      appBar: AppBar(title: const Text('Stopwatch Example')),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Text(
+              secondstotext(milliseconds),
               style: Theme.of(context).textTheme.headlineLarge,
             ),
-
-            const SizedBox(height: 30),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: startTimer,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.white,
-                  ),
-                  child: const Text("Start"),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all<Color>(Colors.green),
+                  foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
                 ),
-
-                const SizedBox(width: 10),
-
-                ElevatedButton(
-                  onPressed: stopTimer,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    foregroundColor: Colors.white,
-                  ),
-                  child: const Text("Stop"),
+                onPressed: _startTimer,
+                child: const Text("Start"),
+              ),
+              const SizedBox(width: 20),
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all<Color>(Colors.red),
+                  foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
                 ),
-
-                const SizedBox(width: 10),
-
-                ElevatedButton(
-                  onPressed: resetTimer,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                  ),
-                  child: const Text("Reset"),
+                onPressed: _stopTimer,
+                child: const Text("Stop"),
+              ),
+              SizedBox(width: 20),
+              IconButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all<Color>(Colors.blue),
+                  foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
                 ),
-              ],
-            ),
-          ],
-        ),
+                onPressed: (){
+                  setState(() {
+                    milliseconds = 0;
+                  });
+                },
+                icon: const Icon(Icons.start),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
