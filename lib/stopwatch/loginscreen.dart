@@ -23,21 +23,11 @@ class _loginwidgetState extends State<loginwidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Icon(
-          Icons.check_circle,
-          color: Colors.green,
-          size: 100,
-        ),
+        const Icon(Icons.check_circle, color: Colors.green, size: 100),
         const SizedBox(height: 20),
-        Text(
-          'Welcome, $name!',
-          style: const TextStyle(fontSize: 24),
-        ),
+        Text('Welcome, $name!', style: const TextStyle(fontSize: 24)),
         const SizedBox(height: 10),
-        Text(
-          'Email: $email',
-          style: const TextStyle(fontSize: 16),
-        ),
+        Text('Email: $email', style: const TextStyle(fontSize: 16)),
       ],
     );
   }
@@ -85,8 +75,7 @@ class _loginwidgetState extends State<loginwidget> {
                   return 'Email cannot be blank';
                 }
 
-                final emailRegex =
-                    RegExp(r'^[^@]+@[^@]+\.[^@]+');
+                final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
 
                 if (!emailRegex.hasMatch(text)) {
                   return 'Invalid email format';
@@ -116,29 +105,22 @@ class _loginwidgetState extends State<loginwidget> {
     );
   }
 
-
-void _validate() {
-  final form = _formKey.currentState;
-  if (form!.validate()) {
-    setState(() {
-      
-      _isLoggedIn = true;
-      name = _nameController.text;
-      email = _emailController.text;
-    });
+  void _validate() {
+    final form = _formKey.currentState;
+    if (form!.validate()) {
+      setState(() {
+        _isLoggedIn = true;
+        name = _nameController.text;
+        email = _emailController.text;
+      });
+    }
   }
-}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
-      body: Center(
-        child: _isLoggedIn
-            ? _buildSuccess()
-            : _buildLoginForm(),
-      ),
+      appBar: AppBar(title: const Text('Login')),
+      body: Center(child: _isLoggedIn ? _buildSuccess() : _buildLoginForm()),
     );
   }
 }
