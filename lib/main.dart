@@ -20,7 +20,7 @@
 //           backgroundColor: Colors.blue,
 //         ),
 //         body: Center(
-//           child: Container( 
+//           child: Container(
 //             width: 300,
 //             height: 300,
 //             decoration: BoxDecoration(
@@ -30,7 +30,6 @@
 //             child: Stack(
 //               alignment: Alignment.center,
 //               children: [
-
 
 //                 // Orange Diamond
 //                 Transform.rotate(
@@ -57,8 +56,8 @@
 
 //                 // Blue Diamond
 //                 Transform.rotate(
-//                   angle: pi / 4, 
-//                   child: Container( 
+//                   angle: pi / 4,
+//                   child: Container(
 //                     width: 100,
 //                     height: 100,
 //                     decoration: BoxDecoration(
@@ -75,13 +74,17 @@
 //     );
 //   }
 // }A
+
 import 'package:flutter/material.dart';
-import 'controls/calenderexample.dart';
-import 'stopwatch/stopwatch_example.dart';
-import 'stopwatch/loginscreen.dart';
-import 'controls/radiobutton.dart';
-import 'controls/inputcontrol.dart';
-import 'controls/dropdown.dart';
+// import 'controls/calenderexample.dart';
+// import 'controls/chkbox.dart';
+// import 'stopwatch/stopwatch_example.dart';
+// import 'stopwatch/loginscreen.dart';
+// import 'controls/radiobutton.dart';
+// import 'controls/inputcontrol.dart';
+// import 'controls/dropdown.dart';
+// import 'controls/imagedisplay.dart';
+import 'controls/scrollviewimage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -94,7 +97,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const DropDownExample(),
+      home: const ScrollImage(),
     );
   }
 }
@@ -114,4 +117,3 @@ class MyApp extends StatelessWidget {
 //     );
 //   }
 // }
-
