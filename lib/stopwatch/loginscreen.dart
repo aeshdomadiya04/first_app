@@ -105,7 +105,7 @@ class _loginwidgetState extends State<loginwidget> {
     );
   }
 
-  void _validate() {
+  void validate() {
     final form = _formKey.currentState;
     if (form!.validate()) {
       setState(() {
