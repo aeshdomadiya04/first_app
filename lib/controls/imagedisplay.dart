@@ -12,7 +12,7 @@ class _ImgDispState extends State<ImgDisp> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(child: Image
-      (image: AssetImage('assets/images/1.jpg'))),
+      (image: AssetImage('assets/images/image1.jpg'))),
     );
   }
 }
