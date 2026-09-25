@@ -59,6 +59,57 @@ class _formListState extends State<formList> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: nameCtrl,
+              decoration: const InputDecoration(
+                labelText: 'Name',
+              ),
+            ),
+
+            RadioListTile<String>(
+              title: const Text('Male'),
+              value: 'M',
+              groupValue: gender,
+              onChanged: (v) => setState(() {gender = v!;}),),
+
+            RadioListTile<String>(
+              title: const Text('Female'),
+              value: 'F',
+              groupValue: gender,
+              onChanged: (v) => setState(() { gender = v!;}), ),
+
+            CheckboxListTile(
+              title: const Text('I Agree'),
+              value: agree,
+              onChanged: (v) => setState(() {agree = v!; }),),
+
+            ElevatedButton(
+              onPressed: _save,
+              child: const Text('Save'),
+            ),
+            SizedBox(height: 10),
+            Expanded(child: ListView.builder(
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                final item = items[index];
+                return ListTile(
+                  title: Text(item['name']),
+                  subtitle: Text('Gender: ${item['gender']}, Agree: ${item['agree']}'),
+                );
+              },
+            ),)
+
+          ]
+
+        ),
+
+
+      )
+    );
   }
 }
