@@ -85,8 +85,10 @@ import 'package:flutter/material.dart';
 // import 'controls/dropdown.dart';
 // import 'controls/imagedisplay.dart';
 // import 'controls/scrollviewimage.dart';
-// import 'controls/gridview.dart';
-import 'controls/tabview.dart';
+// import 'controls/tabview.dart';
+// import 'controls/register.dart';
+// import 'controls/registration.dart';
+import 'controls/tabs.dart';
 
 void main() {
   runApp(const MyApp());
@@ -99,7 +101,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const TabExample(),
+      home: const TabsPage(),
     );
   }
 }
